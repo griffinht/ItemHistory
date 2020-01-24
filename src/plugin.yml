@@ -1,0 +1,11 @@
+name: ItemHistory
+version: 0.1
+author: LemonPickles
+api-version: 1.15
+main: net.lemonpickles.ItemHistory.ItemHistory
+website: lemonpickles.net
+commands:
+  itemhistory:
+    description: Main command for ItemHistory
+    usage: /itemhistory <arguments>
+    aliases: [ih]
