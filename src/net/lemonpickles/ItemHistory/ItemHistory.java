@@ -7,13 +7,13 @@ import java.util.logging.Logger;
 
 public class ItemHistory extends JavaPlugin {
     public Logger logger;
-    TrackedList trackedList;
+    TrackedList trackedItemTree;
     public void onEnable(){
         long start = System.nanoTime();
         logger = Bukkit.getLogger();
         new ItemEvent(this);
         new ItemCmd(this);
-        trackedList = new TrackedList(this);
+        trackedItemTree = new TrackedList(this);
         logger.info("Enabled ItemHistory in "+((System.nanoTime()-start)/1000000)+"ms");
     }
     public void onDisable(){

@@ -1,24 +1,24 @@
 package net.lemonpickles.ItemHistory;
 
-import java.util.List;
-import java.util.UUID;
+import org.bukkit.configuration.serialization.SerializableAs;
 
-public class TrackedItem {
+import java.util.*;
+
+@SerializableAs("TrackedItem")
+public class TrackedItem {//just contains info about an item
     private String name;
-    private UUID uuid;
-    private List<UUID> children;
-    private List<UUID> parents;
-    TrackedItem(List<UUID> parents, String name){
-        this.uuid = UUID.randomUUID();
-        this.parents = parents;
+    public Map<String,Object> serialize(){
+        Map<String,Object> result = new HashMap<>();
+        result.put("name",name);
+        return result;
+    }
+    public static TrackedItem deserialize(Map<String,Object> args){
+        String name = "";
+        if(args.containsKey("name"))name = args.get("name").toString();
+        return new TrackedItem(name);
+    }
+    TrackedItem(String name){
         this.name = name;
     }
-    UUID getUuid(){return uuid;}
-    List<UUID> getParents(){return parents;}
-    List<UUID> getChildren(){return children;}
     String getName(){return name;}
-    void addChild(UUID child){children.add(child);}
-    void addChildren(List<UUID> children){this.children.addAll(children);}
-    boolean hasChild(){return children.size()>0;}
-    boolean hasParent(){return parents.size()>0;}
 }
