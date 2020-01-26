@@ -3,10 +3,10 @@ package net.lemonpickles.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tree<T> {
+public class Graph<T> {//directed acyclic graph with multiple roots
     private List<Node<T>> roots;
-    protected Tree(List<Node<T>> roots){this.roots = roots;}//Tree class can be initialized with or without existing roots
-    protected Tree(){roots = new ArrayList<>();}
+    protected Graph(List<Node<T>> roots){this.roots = roots;}//can be initialized with or without existing roots
+    protected Graph(){roots = new ArrayList<>();}
     public List<Node<T>> getRoots(){return roots;}
     public List<Node<T>> getAllNodes(){
         List<Node<T>> nodes = roots.get(0).getChildren(roots,new ArrayList<>(),-1);//loop through all roots with an empty list for nodes already found, because no nodes have been found yet

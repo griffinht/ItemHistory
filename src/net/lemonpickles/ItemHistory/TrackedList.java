@@ -1,11 +1,11 @@
 package net.lemonpickles.ItemHistory;
 
 import net.lemonpickles.util.Node;
-import net.lemonpickles.util.Tree;
+import net.lemonpickles.util.Graph;
 
 import java.util.*;
 
-public class TrackedList extends Tree<TrackedItem>{
+public class TrackedList extends Graph<TrackedItem> {
     private ItemHistory plugin;
     TrackedList(ItemHistory plugin){
         this.plugin = plugin;
