@@ -1,6 +1,6 @@
 package net.lemonpickles.ItemHistory;
 
-import net.lemonpickles.util.FileMgmt;
+import net.lemonpickles.util.FileManagement;
 import net.lemonpickles.util.Node;
 import org.bukkit.configuration.MemorySection;
 
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class TreeList extends FileMgmt {
+public class TreeList extends FileManagement {
     private ItemHistory plugin;
     TreeList(ItemHistory plugin){
         super(plugin,"nodes.yml");
