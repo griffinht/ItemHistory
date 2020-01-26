@@ -5,16 +5,25 @@ import net.lemonpickles.util.Node;
 import org.bukkit.configuration.MemorySection;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 public class TreeList extends FileMgmt {
+    private ItemHistory plugin;
     TreeList(ItemHistory plugin){
-        super(plugin,"itemtree.yml");
+        super(plugin,"nodes.yml");
+        this.plugin = plugin;
         load();
     }
     public void save(){
-
+        long start = System.nanoTime();
+        List<Node<TrackedItem>> nodes = plugin.trackedItemTree.getAllNodes();
+        config.createSection("node");
+        for(Node<TrackedItem> node:nodes){
+            config.set("node",node);
+        }
+        plugin.logger.info("Saved "+nodes.size()+" nodes to "+file.getName()+" in "+((System.nanoTime()-start)/1000000)+"ms");
     }
     public void load(){
         Map<UUID, Node<TrackedItem>> nodeMap = new HashMap<>();

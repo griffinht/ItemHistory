@@ -9,6 +9,7 @@ public class Graph<T> {//directed acyclic graph with multiple roots
     protected Graph(){roots = new ArrayList<>();}
     public List<Node<T>> getRoots(){return roots;}
     public List<Node<T>> getAllNodes(){
+        if(roots.isEmpty())return new ArrayList<>();
         List<Node<T>> nodes = roots.get(0).getChildren(roots,new ArrayList<>(),-1);//loop through all roots with an empty list for nodes already found, because no nodes have been found yet
         nodes.addAll(roots);
         return nodes;
