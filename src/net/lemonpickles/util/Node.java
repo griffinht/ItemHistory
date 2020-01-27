@@ -29,7 +29,7 @@ public class Node<T>{
     public List<Node<T>> getChildren(List<Node<T>> find, List<Node<T>> found, int level){//level can be -1 to search through all children or a positive integer to only search the first n level of children.
         if(level!=0){//setting level to -1 will never stop the search until all children have been found because level only goes down, because the level will never reach zero
             for(Node<T> node:find){//can find the children of multiple nodes
-                if(node.hasChild()) {
+                if(node.hasChildren()) {
                     for (Node<T> child : node.getChildren()) {
                         if (!found.contains(child)) {//trees can intersect, so the child may have already been found, so only add if it hasn't
                             found.add(child);
@@ -43,11 +43,13 @@ public class Node<T>{
     }
 
     public T getData(){return data;}
-    public boolean hasChild(){return children.size()>0;}
-    void addChild(Node<T> node){children.add(node);}
-    void addChildren(List<Node<T>> nodes){children.addAll(nodes);}
+    public boolean hasChildren(){return children.size()>0;}
+    public boolean hasChild(Node<T> child){return children.contains(child);}
+    public void addChild(Node<T> node){children.add(node);}
+    public void addChildren(List<Node<T>> nodes){children.addAll(nodes);}
     public List<Node<T>> getParents(){return parents;}
-    public boolean hasParent(){return parents.size()>0;}
-    void addParent(Node<T> node){parents.add(node);}
-    void addParent(List<Node<T>> nodes){parents.addAll(nodes);}
+    public boolean hasParents(){return parents.size()>0;}
+    public boolean hasParent(Node<T> parent){return parents.contains(parent);}
+    public void addParent(Node<T> node){parents.add(node);}
+    public void addParent(List<Node<T>> nodes){parents.addAll(nodes);}
 }

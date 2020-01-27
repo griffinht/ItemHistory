@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Graph<T> {//directed acyclic graph with multiple roots
-    private List<Node<T>> roots;
-    protected Graph(List<Node<T>> roots){this.roots = roots;}//can be initialized with or without existing roots
-    protected Graph(){roots = new ArrayList<>();}
+    private List<Node<T>> roots = new ArrayList<>();
     public List<Node<T>> getRoots(){return roots;}
     public List<Node<T>> getAllNodes(){
         if(roots.isEmpty())return new ArrayList<>();
@@ -18,7 +16,7 @@ public class Graph<T> {//directed acyclic graph with multiple roots
         for(Node<T> parent:node.getParents()){//for each parent node add this node as their child
             parent.addChild(node);
         }
-        if(!node.hasParent())roots.add(node);
+        if(!node.hasParents())roots.add(node);
     }
     public void addNodes(List<Node<T>> nodes){
         for(Node<T> node:nodes){
