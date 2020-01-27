@@ -13,7 +13,7 @@ public class TrackedList extends Graph<TrackedItem> {
     List<Node<TrackedItem>> getByName(String name){
         List<Node<TrackedItem>> hits = new ArrayList<>();
         for(Node<TrackedItem> node:getAllNodes()){
-            if(node.getData().getName().equalsIgnoreCase(name)){
+            if(node.getData().getEventName().equalsIgnoreCase(name)){
                 hits.add(node);
             }
         }

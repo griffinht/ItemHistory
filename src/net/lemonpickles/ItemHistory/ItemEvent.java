@@ -18,6 +18,8 @@ class ItemEvent implements Listener {
     }
     @EventHandler
     public void onBlockDispense(BlockDispenseEvent event){
-
+        for(Node<TrackedItem> node:plugin.trackedItemTree.getLeaves()){
+            node.getData();
+        }
     }
 }
