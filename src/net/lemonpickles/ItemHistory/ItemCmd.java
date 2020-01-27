@@ -89,6 +89,12 @@ public class ItemCmd implements CommandExecutor, TabCompleter {
                 }
             }else sender.sendMessage("Not enough arguments");
             return true;
+        }else if(args[0].equalsIgnoreCase("roots")){
+            sender.sendMessage("Listing all roots");
+            for(Node<TrackedItem> node:plugin.trackedItemTree.getRoots())sender.sendMessage(node.getData().getName());
+        }else if(args[0].equalsIgnoreCase("leaves")){
+            sender.sendMessage("Listing all leaves");
+            for(Node<TrackedItem> node:plugin.trackedItemTree.getLeaves())sender.sendMessage(node.getData().getName());
         }
         sender.sendMessage("Unknown argument");
         return true;
@@ -96,7 +102,7 @@ public class ItemCmd implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args){
         List<String> completions = new ArrayList<>();
         if(args.length==1){
-            for(String string:new String[]{"add","get","getChildren","getParents","list","addAsChild"})if(checkCompletions(string,args[0]))completions.add(string);
+            for(String string:new String[]{"add","get","getChildren","getParents","list","addAsChild","roots","leaves"})if(checkCompletions(string,args[0]))completions.add(string);
             return completions;
         }else if(args.length==2){
             if(args[0].equalsIgnoreCase("add"))return completions;
