@@ -40,8 +40,8 @@ public class LinkedItemStack implements ConfigurationSerializable{
         List<ItemStack> children = new ArrayList<>();
         if(value.containsKey("children")){
             Object rawList = value.get("children");
-            if(rawList instanceof Iterable){
-                for(Object raw:(Iterable)rawList) {
+            if(rawList instanceof List<?>){
+                for(Object raw:(List<?>)rawList) {
                     if (raw instanceof ItemStack) {
                         children.add((ItemStack) raw);
                     }
