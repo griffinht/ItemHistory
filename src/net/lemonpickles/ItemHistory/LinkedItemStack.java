@@ -29,7 +29,6 @@ public class LinkedItemStack implements ConfigurationSerializable{
         return result;
     }
     public static LinkedItemStack deserialize(Map<String,Object> value){
-        System.out.println("chldren "+value.get("children"));
         ItemStack parent = null;
         if(value.containsKey("parent")){
             Object raw = value.get("parent");
