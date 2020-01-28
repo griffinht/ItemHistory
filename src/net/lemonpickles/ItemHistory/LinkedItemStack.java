@@ -14,6 +14,10 @@ public class LinkedItemStack implements ConfigurationSerializable{
         this.parent = parent;
         this.children = children;
     }
+    LinkedItemStack(ItemStack parent,ItemStack child){
+        this.parent = parent;
+        this.children = Collections.singletonList(child);
+    }
     LinkedItemStack(ItemStack parent){
         this.parent = parent;
         this.children = new ArrayList<>();
