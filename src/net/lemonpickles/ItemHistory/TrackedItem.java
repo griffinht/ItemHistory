@@ -17,43 +17,45 @@ public class TrackedItem implements ConfigurationSerializable {//just contains i
     private OfflinePlayer offlinePlayer;
     private Block block;
     private Integer itemEntityId;//entity id for item on ground
-    private ItemStack itemStack;
+    private LinkedItemStack linkedItemStack;
     TrackedItem(String eventName,OfflinePlayer offlinePlayer,Block block,Integer itemEntityId,ItemStack itemStack){
         this.eventName = eventName;
         this.offlinePlayer = offlinePlayer;
         this.block = block;
         this.itemEntityId = itemEntityId;
-        this.itemStack = itemStack;
+        this.linkedItemStack = new LinkedItemStack(itemStack);
+    }
+    TrackedItem(String eventName,OfflinePlayer offlinePlayer,Block block,Integer itemEntityId,LinkedItemStack linkedItemStack){
+        this.eventName = eventName;
+        this.offlinePlayer = offlinePlayer;
+        this.block = block;
+        this.itemEntityId = itemEntityId;
+        this.linkedItemStack = linkedItemStack;
     }
     TrackedItem(String eventName){
         this.eventName = eventName;
         this.offlinePlayer = null;
         this.block = null;
         this.itemEntityId = null;
-        this.itemStack = null;
+        this.linkedItemStack = null;
     }
     String getEventName(){return eventName;}
     Block getBlock(){return block;}
     Integer getItemEntityId(){return itemEntityId;}
-    ItemStack itemStack(){return itemStack;}
+    LinkedItemStack getLinkedItemStack(){return linkedItemStack;}
+    OfflinePlayer getOfflinePlayer(){return offlinePlayer;}
 
     @Override
     public Map<String,Object> serialize(){
-        Map<String,Object> value = new LinkedHashMap<>();
-        if(eventName!=null)value.put("eventName",eventName);
-        if(offlinePlayer!=null)value.put("offlinePlayer",offlinePlayer.getUniqueId());
-        if(block!=null)value.put("location",block.getLocation());
-        if(itemEntityId!=null)value.put("itemEntityId",itemEntityId);
-        if(itemStack!=null)value.put("itemStack",itemStack);
-        return value;
+        Map<String,Object> result = new LinkedHashMap<>();
+        if(eventName!=null)result.put("eventName",eventName);
+        if(offlinePlayer!=null)result.put("offlinePlayer",offlinePlayer.getUniqueId());
+        if(block!=null)result.put("location",block.getLocation());
+        if(itemEntityId!=null)result.put("itemEntityId",itemEntityId);
+        if(linkedItemStack!=null)result.put("linkedItemStack",linkedItemStack);
+        return result;
     }
     public static TrackedItem deserialize(Map<String,Object> value){
-        System.out.println(value.keySet());
-        System.out.println(value.values());
-        System.out.println(value.get("itemStack"));
-        for(String string:value.keySet()){
-            if(string.equals("itemStack"))System.out.println(value.get(string));
-        }
         Object eventObject = value.get("eventName");
         String eventName = null;
         if(eventObject!=null)eventName = eventObject.toString();
@@ -74,13 +76,13 @@ public class TrackedItem implements ConfigurationSerializable {//just contains i
         Integer itemEntityId = null;
         if(itemObject!=null)itemEntityId = Integer.parseInt(itemObject.toString());
 
-        ItemStack itemStack = null;
-        if(value.containsKey("itemStack")){
-            Object raw = value.get("itemStack");
-            if(raw instanceof ItemStack){
-                itemStack = (ItemStack)raw;
+        LinkedItemStack linkedItemStack = null;
+        if(value.containsKey("linkedItemStack")){
+            Object raw = value.get("linkedItemStack");
+            if(raw instanceof LinkedItemStack){
+                linkedItemStack = (LinkedItemStack)raw;
             }
         }
-        return new TrackedItem(eventName,offlinePlayer,block,itemEntityId,itemStack);
+        return new TrackedItem(eventName,offlinePlayer,block,itemEntityId,linkedItemStack);
     }
 }

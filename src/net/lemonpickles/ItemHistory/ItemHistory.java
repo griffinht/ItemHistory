@@ -15,6 +15,7 @@ public class ItemHistory extends JavaPlugin {
         logger = Bukkit.getLogger();
         if(!getDataFolder().exists())if(!getDataFolder().mkdir())logger.warning("Could not create plugin folder directory");
         ConfigurationSerialization.registerClass(TrackedItem.class);
+        ConfigurationSerialization.registerClass(LinkedItemStack.class);
         trackedItemTree = new TrackedList(this);
         treeList = new TreeList(this);
         treeList.load();

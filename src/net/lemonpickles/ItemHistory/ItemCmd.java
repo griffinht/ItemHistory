@@ -3,11 +3,9 @@ package net.lemonpickles.ItemHistory;
 import net.lemonpickles.util.Node;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ItemCmd implements CommandExecutor, TabCompleter {
     private ItemHistory plugin;
@@ -108,7 +106,7 @@ public class ItemCmd implements CommandExecutor, TabCompleter {
             System.out.println(object+", "+object.getClass().isInstance(new HashMap<String,Object>()));
             Map<String,Object> otherStringObjectmap = (HashMap<String,Object>)object;
             System.out.println(otherStringObjectmap+", "+otherStringObjectmap.getClass()+", "+otherStringObjectmap.getClass().isInstance(new HashMap<String,Object>()));
-            plugin.trackedItemTree.addNode(new Node<>(new TrackedItem("testTrackedItemTTT",null,((Player)sender).getLocation().getBlock(),null,((Player)sender).getInventory().getItem(0))));
+            plugin.trackedItemTree.addNode(new Node<>(new TrackedItem("testTrackedItemTTT",null,((Player)sender).getLocation().getBlock(),null,new LinkedItemStack(((Player)sender).getInventory().getItem(0),new ArrayList<>(Arrays.asList(((Player)sender).getInventory().getItem(1),((Player)sender).getInventory().getItem(2)))))));
             return true;
         }
         sender.sendMessage("Unknown argument");
