@@ -12,6 +12,10 @@ public class Node<T>{
         this.data = data;
         parents = new ArrayList<>();//a root node, so make parents an empty ArrayList so other methods won't break with a null value
     }
+    public Node(T data, Node<T> parent){
+        this.data = data;
+        this.parents = new ArrayList<>(Collections.singletonList(parent));
+    }
     public Node(T data, List<Node<T>> parents){
         this.data = data;
         this.parents = parents;
