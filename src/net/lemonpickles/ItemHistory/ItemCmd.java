@@ -24,7 +24,7 @@ public class ItemCmd implements CommandExecutor, TabCompleter {
         if(args.length==0){sender.sendMessage("No argument");return true;}
         if(args[0].equalsIgnoreCase("add")){
             if(args.length==2){
-                plugin.trackedItemTree.addNode(new Node<>(new TrackedItem(args[1])));
+                plugin.trackedItemTree.addNode(new Node<>(new TrackedItem(args[1],null,null)));
                 sender.sendMessage("Added "+args[1]+" as a new trackedItem");
             }
             else sender.sendMessage("Not enough arguments");
@@ -81,7 +81,7 @@ public class ItemCmd implements CommandExecutor, TabCompleter {
                 List<Node<TrackedItem>> nodes = plugin.trackedItemTree.getByName(args[1]);
                 if(nodes.size()==0)sender.sendMessage("Could not find trackedItem with name "+args[1]);
                 else{
-                    Node<TrackedItem> node = new Node<>(new TrackedItem(args[2]),nodes);
+                    Node<TrackedItem> node = new Node<>(new TrackedItem(args[2],null,null),nodes);
                     plugin.trackedItemTree.addNode(node);
                     StringBuilder parents = new StringBuilder();
                     for(Node<TrackedItem> parent:node.getParents()) parents.append(parent.getData().getEventName());
@@ -100,13 +100,7 @@ public class ItemCmd implements CommandExecutor, TabCompleter {
         } else if (args[0].equalsIgnoreCase("go")) {
             sender.sendMessage("Going...");
             Map<String,Object> stringObjectMap = new HashMap<>();
-            stringObjectMap.put("hello",new TrackedItem("helyo"));
-            stringObjectMap.put("hi",new TrackedItem("high"));
-            Object object = stringObjectMap;
-            System.out.println(object+", "+object.getClass().isInstance(new HashMap<String,Object>()));
-            Map<String,Object> otherStringObjectmap = (HashMap<String,Object>)object;
-            System.out.println(otherStringObjectmap+", "+otherStringObjectmap.getClass()+", "+otherStringObjectmap.getClass().isInstance(new HashMap<String,Object>()));
-            plugin.trackedItemTree.addNode(new Node<>(new TrackedItem("testTrackedItemTTT",null,((Player)sender).getLocation().getBlock(),null,new LinkedItemStack(((Player)sender).getInventory().getItem(0),new ArrayList<>(Arrays.asList(((Player)sender).getInventory().getItem(1),((Player)sender).getInventory().getItem(2)))))));
+            sender.sendMessage("Gone");
             return true;
         }
         sender.sendMessage("Unknown argument");

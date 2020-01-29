@@ -16,6 +16,7 @@ public class ItemHistory extends JavaPlugin {
         if(!getDataFolder().exists())if(!getDataFolder().mkdir())logger.warning("Could not create plugin folder directory");
         ConfigurationSerialization.registerClass(TrackedItem.class);
         ConfigurationSerialization.registerClass(LinkedItemStack.class);
+        ConfigurationSerialization.registerClass(SavedEntity.class);
         trackedItemTree = new TrackedList(this);
         treeList = new TreeList(this);
         treeList.load();
