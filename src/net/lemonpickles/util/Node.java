@@ -14,10 +14,12 @@ public class Node<T>{
     }
     public Node(T data, Node<T> parent){
         this.data = data;
-        this.parents = new ArrayList<>(Collections.singletonList(parent));
+        if(parent==null)this.parents = new ArrayList<>();
+        else this.parents = new ArrayList<>(Collections.singletonList(parent));
     }
     public Node(T data, List<Node<T>> parents){
         this.data = data;
+        if(parents==null)parents = new ArrayList<>();
         this.parents = parents;
     }
     public Node(T data, List<Node<T>> parents, List<Node<T>> children){
