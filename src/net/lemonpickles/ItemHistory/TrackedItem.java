@@ -1,88 +1,56 @@
 package net.lemonpickles.ItemHistory;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.block.Block;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
-import org.bukkit.inventory.ItemStack;
-import sun.awt.image.ImageWatched;
 
 import java.util.*;
 
 @SerializableAs("TrackedItem")
 public class TrackedItem implements ConfigurationSerializable {//just contains info about an item
     private String eventName;//event that caused this
-    private OfflinePlayer offlinePlayer;
-    private Block block;
-    private Integer itemEntityId;//entity id for item on ground
-    private LinkedItemStack linkedItemStack;
-    TrackedItem(String eventName,OfflinePlayer offlinePlayer,Block block,Integer itemEntityId,ItemStack itemStack){
+    private Location location;//location where the event happened
+    private Map<String,Object> eventInfo;
+    TrackedItem(String eventName, Location location, Map<String,Object> eventInfo){
         this.eventName = eventName;
-        this.offlinePlayer = offlinePlayer;
-        this.block = block;
-        this.itemEntityId = itemEntityId;
-        this.linkedItemStack = new LinkedItemStack(itemStack);
-    }
-    TrackedItem(String eventName,OfflinePlayer offlinePlayer,Block block,Integer itemEntityId,LinkedItemStack linkedItemStack){
-        this.eventName = eventName;
-        this.offlinePlayer = offlinePlayer;
-        this.block = block;
-        this.itemEntityId = itemEntityId;
-        this.linkedItemStack = linkedItemStack;
-    }
-    TrackedItem(String eventName){
-        this.eventName = eventName;
-        this.offlinePlayer = null;
-        this.block = null;
-        this.itemEntityId = null;
-        this.linkedItemStack = null;
+        this.location = location;
+        this.eventInfo = eventInfo;
     }
     String getEventName(){return eventName;}
-    Block getBlock(){return block;}
-    Integer getItemEntityId(){return itemEntityId;}
-    LinkedItemStack getLinkedItemStack(){return linkedItemStack;}
-    OfflinePlayer getOfflinePlayer(){return offlinePlayer;}
+    Location getLocation(){return location;}
+    Map<String,Object> getEventInfo(){return eventInfo;}
 
     @Override
     public Map<String,Object> serialize(){
         Map<String,Object> result = new LinkedHashMap<>();
-        if(eventName!=null)result.put("eventName",eventName);
-        if(offlinePlayer!=null)result.put("offlinePlayer",offlinePlayer.getUniqueId());
-        if(block!=null)result.put("location",block.getLocation());
-        if(itemEntityId!=null)result.put("itemEntityId",itemEntityId);
-        if(linkedItemStack!=null)result.put("linkedItemStack",linkedItemStack);
+        result.put("eventName",eventName);
+        result.put("location",location);
+        result.put("eventInfo",eventInfo);
         return result;
     }
-    public static TrackedItem deserialize(Map<String,Object> value){
-        Object eventObject = value.get("eventName");
+    public static TrackedItem deserialize(Map<String,Object> value){ ;
         String eventName = null;
-        if(eventObject!=null)eventName = eventObject.toString();
+        if(value.containsKey("eventName"))eventName = value.get("eventName").toString();
 
-        Object offlinePlayerObject = value.get("offlinePlayer");
-        OfflinePlayer offlinePlayer = null;
-        if(offlinePlayerObject!=null)offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(offlinePlayerObject.toString()));
-
-        Block block = null;
+        Location location = null;
         if(value.containsKey("location")){
             Object raw = value.get("location");
             if(raw instanceof Location){
-                block = ((Location)raw).getBlock();
+                location = (Location)raw;
             }
         }
 
-        Object itemObject = value.get("itemEntityId");
-        Integer itemEntityId = null;
-        if(itemObject!=null)itemEntityId = Integer.parseInt(itemObject.toString());
-
-        LinkedItemStack linkedItemStack = null;
-        if(value.containsKey("linkedItemStack")){
-            Object raw = value.get("linkedItemStack");
-            if(raw instanceof LinkedItemStack){
-                linkedItemStack = (LinkedItemStack)raw;
+        Map<String,Object> eventInfo = new LinkedHashMap<>();
+        if (value.containsKey("eventInfo")) {
+            Object raw = value.get("eventInfo");
+            if(raw instanceof Map<?,?>){
+                for(Map.Entry<?,?> entry:((Map<?,?>)raw).entrySet()){
+                    eventInfo.put(entry.getKey().toString(),entry.getValue());
+                }
             }
         }
-        return new TrackedItem(eventName,offlinePlayer,block,itemEntityId,linkedItemStack);
+        TrackedItem trackedItem = new TrackedItem(eventName,location,eventInfo);
+        System.out.println("desiedasr "+trackedItem);
+        return trackedItem;
     }
 }
