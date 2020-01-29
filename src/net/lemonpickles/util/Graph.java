@@ -15,6 +15,7 @@ public class Graph<T> {//directed acyclic graph with multiple roots
         return nodes;
     }
     public void addNode(Node<T> node){
+        leaves.add(node);
         for(Node<T> parent:node.getParents()){//for each parent node add this node as their child
             parent.addChild(node);
             leaves.remove(parent);//node with child is not a leaf
@@ -22,7 +23,6 @@ public class Graph<T> {//directed acyclic graph with multiple roots
         if(!node.hasParents())roots.add(node);
     }
     public void addNodes(List<Node<T>> nodes){
-        leaves.addAll(nodes);
         for(Node<T> node:nodes){
             addNode(node);
         }
