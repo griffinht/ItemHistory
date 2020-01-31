@@ -10,13 +10,16 @@ import java.util.*;
 public class LinkedItemStack implements ConfigurationSerializable{
     private ItemStack parent;
     private List<ItemStack> children;
-    LinkedItemStack(ItemStack parent,List<ItemStack> children){
+    private Integer index;
+    LinkedItemStack(ItemStack parent,List<ItemStack> children,Integer index){
         this.parent = parent;
         this.children = children;
+        this.index = index;
     }
-    LinkedItemStack(ItemStack parent,ItemStack child){
+    LinkedItemStack(ItemStack parent,ItemStack child,Integer index){
         this.parent = parent;
         this.children = Collections.singletonList(child);
+        this.index = index;
     }
     LinkedItemStack(ItemStack parent){
         this.parent = parent;
@@ -30,6 +33,7 @@ public class LinkedItemStack implements ConfigurationSerializable{
         Map<String,Object> result = new LinkedHashMap<>();
         result.put("parent",parent);
         result.put("children",children);
+        result.put("index",index);
         return result;
     }
     public static LinkedItemStack deserialize(Map<String,Object> value){
@@ -51,6 +55,8 @@ public class LinkedItemStack implements ConfigurationSerializable{
                 }
             }
         }
-        return new LinkedItemStack(parent,children);
+        Integer index = null;
+        if(value.containsKey("index"))index = Integer.parseInt(value.get("index").toString());
+        return new LinkedItemStack(parent,children,index);
     }
 }

@@ -26,6 +26,7 @@ public class TrackedItem implements ConfigurationSerializable {//just contains i
     }
     String getEventName(){return eventName;}
     Location getLocation(){return location;}
+    long getTime(){return time;}
     Map<String,Object> getEventInfo(){return eventInfo;}
 
     @Override

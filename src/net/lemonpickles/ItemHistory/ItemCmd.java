@@ -5,7 +5,10 @@ import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class ItemCmd implements CommandExecutor, TabCompleter {
     private ItemHistory plugin;
@@ -102,6 +105,16 @@ public class ItemCmd implements CommandExecutor, TabCompleter {
             Map<String,Object> stringObjectMap = new HashMap<>();
             sender.sendMessage("Gone");
             return true;
+        } else if (args[0].equalsIgnoreCase("map")){
+            sender.sendMessage("Mapping");
+            for(Node<TrackedItem> root:plugin.trackedItemTree.getRoots()){
+                StringBuilder stringBuilder = new StringBuilder("map: ");
+                for(Node<TrackedItem> child:root.getChildren(-1)){
+                    stringBuilder.append(child.getData().getEventName()).append(", ").append(new SimpleDateFormat("HH:mm:ss").format(new Date(child.getData().getTime()))).append("-> ");
+                }
+                sender.sendMessage(stringBuilder.toString());
+            }
+            return true;
         }
         sender.sendMessage("Unknown argument");
         return true;
@@ -109,7 +122,7 @@ public class ItemCmd implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args){
         List<String> completions = new ArrayList<>();
         if(args.length==1){
-            for(String string:new String[]{"add","get","getChildren","getParents","list","addAsChild","roots","leaves","go"})if(checkCompletions(string,args[0]))completions.add(string);
+            for(String string:new String[]{"add","get","getChildren","getParents","list","addAsChild","roots","leaves","go","map"})if(checkCompletions(string,args[0]))completions.add(string);
             return completions;
         }else if(args.length==2){
             if(args[0].equalsIgnoreCase("add"))return completions;

@@ -37,6 +37,8 @@ class ItemEvent implements Listener {
             System.out.println(((LinkedItemStack)nodeTrackedItem.getEventInfo().get("linkedItemStack")).getParent());
             System.out.println(event.getItem().getItemStack());
             if(nodeTrackedItem.getEventInfo().containsKey("linkedItemStack")&&((LinkedItemStack)nodeTrackedItem.getEventInfo().get("linkedItemStack")).getParent().equals(event.getItem().getItemStack()))trackedItemNode = node;
+            System.out.println((trackedItemNode==null));
+            System.out.println();
         }
         Map<String,Object> map = new LinkedHashMap<>();
         map.put("savedEntity",new SavedEntity(event.getEntity()));
@@ -51,6 +53,8 @@ class ItemEvent implements Listener {
             System.out.println(((SavedEntity)nodeTrackedItem.getEventInfo().get("savedEntity")).getUniqueId());
             System.out.println(event.getEntity().getUniqueId());
             if(nodeTrackedItem.getEventInfo().containsKey("savedEntity")&&((SavedEntity)nodeTrackedItem.getEventInfo().get("savedEntity")).getUniqueId().equals(event.getEntity().getUniqueId()))trackedItemNode = node;
+            System.out.println((trackedItemNode==null));
+            System.out.println();
         }
         Map<String,Object> map = new LinkedHashMap<>();
         map.put("savedEntity",new SavedEntity(event.getEntity()));
@@ -65,6 +69,8 @@ class ItemEvent implements Listener {
             System.out.println(((LinkedItemStack)nodeTrackedItem.getEventInfo().get("linkedItemStack")).getParent());
             System.out.println(event.getEntity().getItemStack());
             if(nodeTrackedItem.getEventInfo().containsKey("linkedItemStack")&&((LinkedItemStack)nodeTrackedItem.getEventInfo().get("linkedItemStack")).getParent().equals(event.getEntity().getItemStack()))trackedItemNode = node;
+            System.out.println((trackedItemNode==null));
+            System.out.println();
         }
         Map<String,Object> map = new LinkedHashMap<>();
         map.put("savedEntity",new SavedEntity(event.getEntity()));
