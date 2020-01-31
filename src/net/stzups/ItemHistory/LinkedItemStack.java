@@ -1,4 +1,4 @@
-package net.lemonpickles.ItemHistory;
+package net.stzups.ItemHistory;
 
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;

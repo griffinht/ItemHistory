@@ -1,7 +1,7 @@
-package net.lemonpickles.ItemHistory;
+package net.stzups.ItemHistory;
 
-import net.lemonpickles.util.FileManagement;
-import net.lemonpickles.util.Node;
+import net.stzups.util.FileManagement;
+import net.stzups.util.Node;
 import org.bukkit.configuration.MemorySection;
 
 import java.util.*;

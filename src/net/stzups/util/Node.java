@@ -1,4 +1,4 @@
-package net.lemonpickles.util;
+package net.stzups.util;
 
 import java.util.ArrayList;
 import java.util.Collections;

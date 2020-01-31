@@ -1,7 +1,7 @@
-package net.lemonpickles.ItemHistory;
+package net.stzups.ItemHistory;
 
-import net.lemonpickles.util.Node;
-import net.lemonpickles.util.Graph;
+import net.stzups.util.Node;
+import net.stzups.util.Graph;
 
 import java.util.*;
 
