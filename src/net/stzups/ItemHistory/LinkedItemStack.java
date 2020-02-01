@@ -1,8 +1,10 @@
 package net.stzups.ItemHistory;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 
@@ -10,16 +12,13 @@ import java.util.*;
 public class LinkedItemStack implements ConfigurationSerializable{
     private ItemStack parent;
     private List<ItemStack> children;
-    private Integer index;
-    LinkedItemStack(ItemStack parent,List<ItemStack> children,Integer index){
+    LinkedItemStack(ItemStack parent, List<ItemStack> children){
         this.parent = parent;
         this.children = children;
-        this.index = index;
     }
-    LinkedItemStack(ItemStack parent,ItemStack child,Integer index){
+    LinkedItemStack(ItemStack parent,ItemStack child){
         this.parent = parent;
         this.children = Collections.singletonList(child);
-        this.index = index;
     }
     LinkedItemStack(ItemStack parent){
         this.parent = parent;
@@ -33,30 +32,18 @@ public class LinkedItemStack implements ConfigurationSerializable{
         Map<String,Object> result = new LinkedHashMap<>();
         result.put("parent",parent);
         result.put("children",children);
-        result.put("index",index);
         return result;
     }
     public static LinkedItemStack deserialize(Map<String,Object> value){
-        ItemStack parent = null;
-        if(value.containsKey("parent")){
-            Object raw = value.get("parent");
-            if(raw instanceof ItemStack){
-                parent = (ItemStack)raw;
-            }
-        }
+        ItemStack parent;
+        if(value.containsKey("parent")&&value.get("parent") instanceof ItemStack)parent = (ItemStack)value.get("parent");
+        else return null;
         List<ItemStack> children = new ArrayList<>();
-        if(value.containsKey("children")){
-            Object rawList = value.get("children");
-            if(rawList instanceof List<?>){
-                for(Object raw:(List<?>)rawList) {
-                    if (raw instanceof ItemStack) {
-                        children.add((ItemStack) raw);
-                    }
-                }
+        if(value.containsKey("children")&&value.get("children")instanceof List<?>){
+            for(Object raw:(List<?>)value.get("children")) {
+                if (raw instanceof ItemStack)children.add((ItemStack)raw);
             }
         }
-        Integer index = null;
-        if(value.containsKey("index"))index = Integer.parseInt(value.get("index").toString());
-        return new LinkedItemStack(parent,children,index);
+        return new LinkedItemStack(parent,children);
     }
 }
