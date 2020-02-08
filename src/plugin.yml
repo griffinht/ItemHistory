@@ -2,7 +2,7 @@ name: ItemHistory
 version: 0.1
 author: stzups
 api-version: 1.15
-main: net.stzups.ItemHistory.ItemHistory
+main: net.stzups.itemhistory.ItemHistory
 website: stzups.net
 commands:
   itemhistory:

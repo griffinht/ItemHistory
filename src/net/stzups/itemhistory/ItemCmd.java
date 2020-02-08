@@ -1,4 +1,4 @@
-package net.stzups.ItemHistory;
+package net.stzups.itemhistory;
 
 import net.stzups.util.Node;
 import org.bukkit.command.*;

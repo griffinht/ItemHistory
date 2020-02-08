@@ -1,4 +1,4 @@
-package net.stzups.ItemHistory;
+package net.stzups.itemhistory;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;

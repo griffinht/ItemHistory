@@ -1,4 +1,4 @@
-package net.stzups.ItemHistory;
+package net.stzups.itemhistory;
 
 import net.stzups.util.Node;
 import org.bukkit.event.EventHandler;
@@ -9,7 +9,6 @@ import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
