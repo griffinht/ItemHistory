@@ -1,6 +1,6 @@
 package net.stzups.itemhistory;
 
-import net.stzups.util.Node;
+import net.stzups.util.DirectedAcyclicGraph.Node;
 import org.bukkit.command.*;
 
 import java.text.SimpleDateFormat;

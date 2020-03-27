@@ -1,7 +1,7 @@
 package net.stzups.itemhistory;
 
 import net.stzups.util.FileManagement;
-import net.stzups.util.Node;
+import net.stzups.util.DirectedAcyclicGraph.Node;
 import org.bukkit.configuration.MemorySection;
 
 import java.util.*;
