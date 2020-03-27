@@ -11,7 +11,7 @@ public class ItemCmd implements CommandExecutor, TabCompleter {
 
     ItemCmd(ItemHistory plugin) {
         this.plugin = plugin;
-        PluginCommand pluginCommand = plugin.getCommand("itemhistory");
+        PluginCommand pluginCommand = plugin.getCommand("itemhistory");//test
         assert pluginCommand != null;
         pluginCommand.setExecutor(this);
         pluginCommand.setTabCompleter(this);
